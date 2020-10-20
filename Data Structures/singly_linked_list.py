@@ -66,3 +66,19 @@ class MyLinkedList:
             pred = pred.next
 
         pred = pred.next.next
+
+    def printList(self):
+        curr = self.head
+        while curr:
+            print(curr.val)
+            curr = curr.next
+
+if __name__ == "__main__":
+    list = MyLinkedList()
+    list.addAtHead(30)
+    list.addAtHead(20)
+    list.addAtHead(10)
+    list.printList()
+
+
+
