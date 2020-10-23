@@ -1,0 +1,49 @@
+# Given a binary search tree and a range [a, b] (inclusive), return the sum of the elements of the binary search tree within the range.
+#
+# For example, given the following tree:
+#
+#     5
+#    / \
+#   3   8
+#  / \ / \
+# 2  4 6  10
+# and the range [4, 9], return 23 (5 + 4 + 6 + 8).
+
+class Node:
+    def __init__(self, val, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
+
+# Brute Force, Complexity: O(n)
+def sum_range(node, lower, upper):
+    if node is None:
+        return 0
+
+    return sum_range(node.left, lower, upper) + \
+           sum_range(node.right, lower, upper) + \
+           (node.val if lower <= node.val <= upper else 0)
+
+# This still takes O(n) time, but it is faster since we skip all unnecessary checks.
+def sum_range_fast(node, lower, upper):
+    if node is None:
+        return 0
+
+    if lower <= node.val <= upper:
+        return node.val + sum_range_fast(node.left, lower, upper) + \
+            sum_range_fast(node.right, lower, upper)
+
+    if node.left < lower:
+        return sum_range_fast(node.right, lower, upper)
+
+    if node.right > upper:
+        return sum_range_fast(node.left, lower, upper)
+
+
+if __name__ == '__main__':
+    node = Node(4)
+    node.left = Node(3)
+    node.right = Node(5)
+    result = sum_range(node, 1, 4)
+    print(result)

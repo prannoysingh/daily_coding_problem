@@ -6,6 +6,10 @@ import math
 
 class ClosestPair:
 
+    # Look at the Divide and Conquer Algorithm.
+    # https://www.dailycodingproblem.com/solution/340?token=26ad6f07b7571b9f6f7160a965e0b7ff178d75e7f79e37f05ff39bbda351516c5d334dc8
+
+    # Approach 1 => O(n ^ 2)
     def closest_pair_brute_force(self, points):
         def distance(p1, p2):
             x1, y1 = p1
